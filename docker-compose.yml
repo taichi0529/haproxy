@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  haproxy:
+    container_name: haproxy
+    image: haproxy:1.7-alpine
+    #restart: always
+    ports:
+      - "443:8888"
+    volumes:
+      - /Users/taichi/work/haproxy:/usr/local/etc/haproxy:ro
+    networks:
+      haproxy_net:
+        ipv4_address: 172.16.254.10
+
+networks:
+  haproxy_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.16.254.0/24
